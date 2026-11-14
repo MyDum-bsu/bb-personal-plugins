@@ -23,6 +23,7 @@ export default definePluginApp((app) => {
           if (!content || !footer) return;
           const cover = footer.querySelector<HTMLElement>("[data-app-composer]") ?? footer;
           current.add(content);
+          toObserve.add(content);
           toObserve.add(viewport);
           toObserve.add(footer);
           toObserve.add(cover);
@@ -50,7 +51,7 @@ export default definePluginApp((app) => {
         for (const target of current) targets.add(target);
       }
       const mutations = new MutationObserver(schedule);
-      mutations.observe(document.body, { subtree: true, childList: true });
+      mutations.observe(document.body, { subtree: true, childList: true, characterData: true });
       document.addEventListener("scroll", schedule, { capture: true, passive: true });
       window.addEventListener("resize", schedule, { passive: true });
       schedule();
