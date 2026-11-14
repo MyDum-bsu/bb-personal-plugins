@@ -33,3 +33,5 @@ The [ZCode icon plugin](plugins/bb-plugin-zcode-icon/README.md) supplies its pro
 `noir-ember` uses the point-matrix Ember artwork from `optimization/tracker/web/lib/portraits/ember.ts` across the whole window, with a frosted sidebar and a gentler blur in the chat. The source image is `optimization/tracker/tools/portraits/src/ember.png`. Install by copying `themes/noir-ember/theme.css` to `~/.bb/theme/noir-ember/theme.css` and running `bb theme set noir-ember`. The previous wallpaper remains available through `bb theme set noir-orion`.
 
 `noir-orion-glass` extends Orion across the entire window, with separate blur for the chat and the glass sidebar. Install its `theme.css` in `~/.bb/theme/noir-orion-glass/` and select it with `bb theme set noir-orion-glass`.
+
+[ZCode Start Plan usage](plugins/bb-plugin-zcode-start-usage/README.md) adds the actual Start Plan token balance to Provider Usage, including the compact sidebar card.
