@@ -18,7 +18,7 @@ export default definePluginApp((app) => {
         const current = new Set<HTMLElement>();
         const toObserve = new Set<HTMLElement>();
         document.querySelectorAll<HTMLElement>("[data-thread-window] [data-page-scroll-viewport]").forEach((viewport) => {
-          const content = viewport.querySelector<HTMLElement>('[data-timeline-row-list="top-level"]');
+          const content = viewport.querySelector<HTMLElement>('[data-scroll-attached] > div:has([data-timeline-row-list="top-level"])');
           const footer = viewport.querySelector<HTMLElement>("[data-scroll-footer]");
           if (!content || !footer) return;
           const cover = footer.querySelector<HTMLElement>("[data-app-composer]") ?? footer;

@@ -29,3 +29,7 @@ test the new desktop and adapter versions, update the pinned versions and
 patch if appropriate, then run the installer. Keep the previous version until
 the new one works; changing the BB provider happens only after preparation.
 No API keys or tokens belong in this repository or BB's provider settings.
+
+## Start Plan usage
+
+`node zcode-start/usage.mjs` reads the Start Plan balance using the existing ZCode login and device identity, without printing or storing credentials. It reports plan name, model, token use and the end of the billing window. Override `ZCODE_APP_VERSION` and `ZCODE_ACP_DIR` after checking compatibility during upgrades. BB's built-in ACP provider currently exposes no usage reader for this agent, so this command does not add a row to Provider Usage.
