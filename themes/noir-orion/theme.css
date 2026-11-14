@@ -102,3 +102,8 @@
 .dark [data-thread-window] [data-scroll-footer] .chat-prompt-box {
   position: relative;
 }
+
+/* Question tabs already clip to their scroll container; avoid dark edge fades. */
+.dark [data-overflow-fade]:has(~ [data-question-tabs]) {
+  display: none;
+}
