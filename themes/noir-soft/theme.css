@@ -1,0 +1,65 @@
+/* Noir — near-black, restrained text and surfaces. */
+:root,
+.light {
+  --canvas: #F4F3EF;
+  --ink: #353A34;
+  --sidebar: #EBEDE7;
+  --card: #FBFBF7;
+  --primary: #52664C;
+  --primary-foreground: #FCFFF8;
+  --muted-foreground: #5B6656;
+  --subtle-foreground: #65705C;
+  --readback-foreground: #616C5A;
+  --file-accent: #4C6858;
+  --popover: #FBFBF7;
+  --destructive: #985C59;
+  --destructive-foreground: #FFFAF7;
+  --destructive-text: #984D49;
+  --warning: #8A642E;
+  --warning-text: #7A5523;
+  --attention: #896532;
+  --success: #466945;
+  --diff-added: #466945;
+  --diff-removed: #984D49;
+  --pr-merged: #72618B;
+}
+.dark {
+  --canvas: #141A16;
+  --ink: #C5D0C6;
+  --sidebar: #111613;
+  --card: #1A211C;
+  --primary: #A9C8AB;
+  --primary-foreground: #1B291D;
+  --muted-foreground: #ACBDB0;
+  --subtle-foreground: #96AA9A;
+  --readback-foreground: #A2B3A5;
+  --file-accent: #A7C7B4;
+  --popover: #202A23;
+  --destructive: #985C59;
+  --destructive-foreground: #FFFAF7;
+  --destructive-text: #CB9791;
+  --warning: #B6A178;
+  --warning-text: #C2AD86;
+  --attention: #D5AD6D;
+  --success: #80CFA0;
+  --diff-added: #9AB294;
+  --diff-removed: #CB9791;
+  --pr-merged: #B9A2DA;
+  --border: #334139;
+  --border-hairline: #1A211B;
+  --border-seam: #29362D;
+  --sidebar-border: #29362D;
+  --surface-selected: #26392B;
+  --surface-selected-border: #466A4B;
+  --state-hover: #202F24;
+  --state-active: #26392B;
+  --secondary: #202E24;
+  --muted: #25342A;
+  --sidebar-accent: #202F24;
+  --surface-recessed-solid: #101713;
+  --surface-raised: #202920;
+  --surface-scrim: #141A16;
+}
+
+/* Reading size inspired by the user’s screenshot. */
+.dark [data-markdown-preview] { font-size: 16px; line-height: 1.65; }
