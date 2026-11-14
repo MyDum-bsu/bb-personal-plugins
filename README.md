@@ -2,6 +2,10 @@
 
 Personal extensions and settings for BB.
 
+## Chat Sidebar
+
+Based on [seoperin/bb-plugin-chat-sidebar](https://github.com/seoperin/bb-plugin-chat-sidebar) v0.2.8. Pinned chats come first, followed by waiting, working and other chats; each group is ordered by activity. The current installation uses a local UI bundle over the upstream cache because changing its source would remove plugin settings.
+
 ## Follow Up
 
 Based on [matthewdias/bb-plugins](https://github.com/matthewdias/bb-plugins), version follow-up/v0.8.1. The composer card is visible only when the thread has open follow-ups. Done items remain stored and accessible through the CLI.
