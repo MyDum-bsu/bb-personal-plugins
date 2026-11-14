@@ -17,3 +17,7 @@ The [ZCode icon plugin](plugins/bb-plugin-zcode-icon/README.md) supplies its pro
 ## Voice input
 
 [Hex Voice](plugins/bb-plugin-hex-voice/README.md) transcribes BB recordings locally with Hex Parakeet v3.
+
+## Thinking formatting
+
+[Thinking Format](plugins/bb-plugin-thinking-format/README.md) formats bold headings in the live reasoning view.
