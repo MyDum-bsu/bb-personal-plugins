@@ -13,12 +13,16 @@ export function GroupHeader({
   collapsed,
   sticky,
   onToggle,
+  onProjectDragStart,
+  onProjectDrop,
 }: {
   group: ProjectGroup;
   collapsed: boolean;
   /** Stays under the search and tabs while its group scrolls past. */
   sticky: boolean;
   onToggle: () => void;
+  onProjectDragStart?: (projectId: string) => void;
+  onProjectDrop?: (projectId: string) => void;
 }) {
   const t = useT();
   const name =
@@ -34,11 +38,29 @@ export function GroupHeader({
   const header = (
     <button
       type="button"
+      data-project-heading={group.project?.id}
       aria-expanded={!collapsed}
       aria-label={t(collapsed ? "folder.expand" : "folder.collapse", { name })}
       onClick={onToggle}
+      draggable={group.project !== null}
+      onDragStart={(event) => {
+        if (group.project === null) return;
+        event.dataTransfer.effectAllowed = "move";
+        event.dataTransfer.setData("text/plain", group.project.id);
+        onProjectDragStart?.(group.project.id);
+      }}
+      onDragOver={(event) => {
+        if (group.project !== null) { event.preventDefault(); event.dataTransfer.dropEffect = "move"; }
+      }}
+      onDrop={(event) => {
+        if (group.project === null) return;
+        event.preventDefault();
+        event.stopPropagation();
+        onProjectDrop?.(group.project.id);
+      }}
       className={cn(
-        "flex h-7 w-full cursor-pointer items-center gap-1.5 rounded-md px-2 text-left text-[11px] font-medium uppercase tracking-wide text-muted-foreground outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring",
+        "flex h-8 w-full cursor-pointer items-center gap-1.5 rounded-md px-2 text-left text-[13px] font-semibold tracking-normal text-foreground outline-none hover:bg-sidebar-accent focus-visible:ring-2 focus-visible:ring-ring",
+        group.project !== null && "cursor-grab active:cursor-grabbing",
         sticky && "sticky top-[var(--chat-top,0px)] z-[5] bg-sidebar",
       )}
     >

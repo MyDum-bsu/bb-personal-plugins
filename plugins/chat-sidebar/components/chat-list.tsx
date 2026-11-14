@@ -66,6 +66,7 @@ const DAY = 86_400_000;
 const FOLDER_KEY = "chat-sidebar/folder";
 const COLLAPSED_KEY = "chat-sidebar/collapsed-groups";
 const EXPANDED_KEY = "chat-sidebar/expanded-chats";
+const PROJECT_ORDER_KEY = "chat-sidebar/project-order";
 const ACTIVE_ONLY = { experimental_lifecycles: ["active"] } as const;
 const WITH_ARCHIVE = {
   experimental_lifecycles: ["active", "archived"],
@@ -142,6 +143,8 @@ function ChatListView({ activeThreadId, isCompactViewport, onNavigate }: PluginT
   const now = useNow(30_000);
   const [query, setQuery] = useState("");
   const [showQuiet, setShowQuiet] = useState(false);
+  const [projectOrder, setProjectOrder] = useState<string[]>(() => readStored(PROJECT_ORDER_KEY, parseStringArray, []));
+  const draggedProject = useRef<string | null>(null);
   const [collapsed, setCollapsed] = useState<ReadonlySet<string>>(
     () => new Set(readStored(COLLAPSED_KEY, parseStringArray, [])),
   );
@@ -262,6 +265,26 @@ function ChatListView({ activeThreadId, isCompactViewport, onNavigate }: PluginT
 
   const paging = usePaging(shown.length, PAGE_SIZE, `${activeFolder}\n${needle}`);
   const visible = shown.slice(0, paging.limit);
+  const projectGroups = groupByProject(visible, projects);
+  const projectRanks = new Map(projectOrder.map((id, index) => [id, index]));
+  const sortedGroups = projectGroups.slice().sort((a, b) => {
+    if (a.key === "pinned" || b.key === "pinned") return a.key === "pinned" ? -1 : 1;
+    if (a.project === null || b.project === null) return a.project === null ? 1 : -1;
+    return (projectRanks.get(a.key) ?? Infinity) - (projectRanks.get(b.key) ?? Infinity);
+  });
+  const moveProject = (target: string) => {
+    const dragged = draggedProject.current;
+    draggedProject.current = null;
+    if (!dragged || dragged === target) return;
+    const present = sortedGroups.flatMap((group) => group.project ? [group.key] : []);
+    const next = [...present, ...projectOrder.filter((id) => !present.includes(id))];
+    const from = next.indexOf(dragged), to = next.indexOf(target);
+    if (from < 0 || to < 0) return;
+    next.splice(from, 1);
+    next.splice(to, 0, dragged);
+    setProjectOrder(next);
+    writeStored(PROJECT_ORDER_KEY, JSON.stringify(next));
+  };
 
   const providerById = useMemo(
     () => new Map<string, ProviderSummary>(providers.map((provider) => [provider.id, provider])),
@@ -429,13 +452,15 @@ function ChatListView({ activeThreadId, isCompactViewport, onNavigate }: PluginT
                   ) : shown.length === 0 ? (
                     note(emptyText)
                   ) : grouped ? (
-                    groupByProject(visible, projects).map((group) => (
+                    sortedGroups.map((group) => (
                       <section key={group.key} className="mb-1">
                         <GroupHeader
                           group={group}
                           collapsed={collapsed.has(group.key)}
                           sticky={settings.stickyHeadings}
                           onToggle={() => toggleGroup(group.key)}
+                          onProjectDragStart={(id) => { draggedProject.current = id; }}
+                          onProjectDrop={moveProject}
                         />
                         {collapsed.has(group.key) ? null : <ul className="space-y-px">{group.chats.map(renderRow)}</ul>}
                       </section>

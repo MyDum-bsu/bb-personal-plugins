@@ -97,6 +97,21 @@ async function render(
 }
 
 describe("chat list", () => {
+  it("reorders project headers and remembers the order after remount", async () => {
+    localStorage.removeItem("chat-sidebar/project-order");
+    const first = await render({ language: "English", projects: "List headers" });
+    const names = () => [...first.view.container.querySelectorAll("[data-project-heading]")].map((node) => node.getAttribute("data-project-heading"));
+    expect(names()).toEqual(["proj_a", "proj_b"]);
+    const transfer = { effectAllowed: "", dropEffect: "", setData: vi.fn() };
+    fireEvent.dragStart(screen.getByRole("button", { name: "Collapse Beta" }), { dataTransfer: transfer });
+    fireEvent.dragOver(screen.getByRole("button", { name: "Collapse Alpha" }), { dataTransfer: transfer });
+    fireEvent.drop(screen.getByRole("button", { name: "Collapse Alpha" }), { dataTransfer: transfer });
+    expect(names()).toEqual(["proj_b", "proj_a"]);
+    cleanup();
+    const second = await render({ language: "English", projects: "List headers" });
+    expect([...second.view.container.querySelectorAll("[data-project-heading]")].map((node) => node.getAttribute("data-project-heading"))).toEqual(["proj_b", "proj_a"]);
+    localStorage.removeItem("chat-sidebar/project-order");
+  });
   it("renders one row per root with bb's shortcut contract", async () => {
     const { view } = await render({ language: "English" });
     const anchors = view.container.querySelectorAll("a[data-sidebar-thread-shortcut-target]");
