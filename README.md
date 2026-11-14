@@ -11,3 +11,5 @@ Install locally: `bb plugin install path:/absolute/path/to/bb-personal-plugins/p
 ## ZCode Start Plan
 
 The pinned ACP setup and upgrade instructions are in [zcode-start](zcode-start/README.md).
+
+The [ZCode icon plugin](plugins/bb-plugin-zcode-icon/README.md) supplies its provider mark in BB.
