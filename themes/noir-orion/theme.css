@@ -86,3 +86,19 @@
 .dark [data-thread-window] [data-scroll-footer] > .bg-background > .bg-gradient-to-b {
   background-image: none;
 }
+
+/* A feathered frosted layer obscures scrolled messages under the composer. */
+.dark [data-thread-window] [data-scroll-footer] > .bg-background::before {
+  content: "";
+  position: absolute;
+  inset: -72px 0 0;
+  pointer-events: none;
+  background: rgba(17, 24, 20, .97);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  mask-image: linear-gradient(to bottom, transparent, #000 72px);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 72px);
+}
+.dark [data-thread-window] [data-scroll-footer] .chat-prompt-box {
+  position: relative;
+}
