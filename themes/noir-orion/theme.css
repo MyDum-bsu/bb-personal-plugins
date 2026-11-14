@@ -77,3 +77,9 @@
   .dark [data-thread-window] { background-position: 48% center; }
   .dark [data-thread-window] [data-page-scroll-viewport] { backdrop-filter: blur(2px); }
 }
+
+/* Continue the background behind the sticky composer without obscuring text. */
+.dark [data-thread-window] [data-scroll-footer] > .bg-background {
+  background-color: rgba(20, 26, 22, .28);
+  backdrop-filter: blur(12px);
+}
