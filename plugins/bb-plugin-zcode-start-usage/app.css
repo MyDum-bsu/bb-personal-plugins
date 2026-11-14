@@ -1,0 +1,2 @@
+/* Preserve the active tab in older chats that already use this bridge. */
+button[title="ZCode Start Plan · лимит"]:not(.border-foreground) { display: none !important; }

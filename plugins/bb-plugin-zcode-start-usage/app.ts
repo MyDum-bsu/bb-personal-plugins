@@ -1,3 +1,4 @@
+import './app.css';
 import { definePluginApp } from '@get-bb/plugin-sdk/app';
 import { applyUsageUpdate } from './usage-state.mjs';
 

@@ -9,3 +9,5 @@ Requires the pinned local runtime and adapter from `../../zcode-start/install.py
 The bundled Provider Usage UI currently filters out custom provider entries. This plugin therefore adds its own row to the existing settings list and compact sidebar card, updating it every minute. Its row is displayed alongside Codex or OpenCode and reports failures as unavailable.
 
 If a refresh fails, the card keeps the last successful value and labels its update time instead of replacing it with an error. A browser-local cached value is restored for up to one hour on reopening, marked as stale until a fresh request succeeds. Run `node --test plugins/bb-plugin-zcode-start-usage/usage-state.test.mjs` to check this behavior.
+
+The provider picker hides the maintenance bridge when it is not selected. Existing chats that already use it retain their active tab and keep working; the provider itself remains enabled for usage reporting.
