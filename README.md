@@ -35,3 +35,5 @@ The [ZCode icon plugin](plugins/bb-plugin-zcode-icon/README.md) supplies its pro
 `noir-orion-glass` extends Orion across the entire window, with separate blur for the chat and the glass sidebar. Install its `theme.css` in `~/.bb/theme/noir-orion-glass/` and select it with `bb theme set noir-orion-glass`.
 
 [ZCode Start Plan usage](plugins/bb-plugin-zcode-start-usage/README.md) adds the actual Start Plan token balance to Provider Usage, including the compact sidebar card.
+
+[Pi compatibility](pi/README.md) avoids a duplicate `AskUserQuestion` tool when Pi runs inside BB.
