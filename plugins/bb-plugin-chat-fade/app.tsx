@@ -26,11 +26,11 @@ export default definePluginApp((app) => {
           toObserve.add(viewport);
           toObserve.add(footer);
           toObserve.add(cover);
-          const atEnd = viewport.scrollHeight - viewport.clientHeight - viewport.scrollTop <= 2;
-          // At the end messages are already above the footer; keep the last
-          // lines fully visible instead of fading useful content.
-          const bottom = atEnd ? content.scrollHeight + 100 : Math.max(0, cover.getBoundingClientRect().top + 8 - content.getBoundingClientRect().top);
-          const start = atEnd ? bottom - 1 : Math.max(0, bottom - 12);
+          // The entire sticky footer can cover messages (queue and cards too).
+          // Always use its actual position; at the scroll end it lies below
+          // the content naturally, so no special-case is needed.
+          const bottom = Math.max(0, footer.getBoundingClientRect().top + 6 - content.getBoundingClientRect().top);
+          const start = Math.max(0, bottom - 8);
           content.style.setProperty("--bb-orion-fade-start", `${start}px`);
           content.style.setProperty("--bb-orion-fade-end", `${Math.max(start + 1, bottom)}px`);
         });
