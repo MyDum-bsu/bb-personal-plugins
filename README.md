@@ -25,3 +25,7 @@ The [ZCode icon plugin](plugins/bb-plugin-zcode-icon/README.md) supplies its pro
 ## Thinking formatting
 
 [Thinking Format](plugins/bb-plugin-thinking-format/README.md) formats bold headings in the live reasoning view.
+
+## Themes
+
+`noir-orion` is a separate version of `noir-soft` with a dimmed, blurred Orion background in chat windows. The image was copied from `optimization/tracker/tools/portraits/src/orion.jpg`; the CSS embeds a reduced WebP so it works in remote BB clients. Install by copying `themes/noir-orion/theme.css` to `~/.bb/theme/noir-orion/theme.css`, then run `bb theme set noir-orion`. Return to the previous theme with `bb theme set noir-soft`.
