@@ -21,14 +21,16 @@ export default definePluginApp((app) => {
           const content = viewport.querySelector<HTMLElement>('[data-timeline-row-list="top-level"]');
           const footer = viewport.querySelector<HTMLElement>("[data-scroll-footer]");
           if (!content || !footer) return;
+          const cover = footer.querySelector<HTMLElement>("[data-app-composer]") ?? footer;
           current.add(content);
           toObserve.add(viewport);
           toObserve.add(footer);
+          toObserve.add(cover);
           const atEnd = viewport.scrollHeight - viewport.clientHeight - viewport.scrollTop <= 2;
           // At the end messages are already above the footer; keep the last
           // lines fully visible instead of fading useful content.
-          const bottom = atEnd ? content.scrollHeight + 100 : Math.max(0, footer.getBoundingClientRect().top - content.getBoundingClientRect().top);
-          const start = atEnd ? bottom - 1 : Math.max(0, bottom - 28);
+          const bottom = atEnd ? content.scrollHeight + 100 : Math.max(0, cover.getBoundingClientRect().top + 8 - content.getBoundingClientRect().top);
+          const start = atEnd ? bottom - 1 : Math.max(0, bottom - 12);
           content.style.setProperty("--bb-orion-fade-start", `${start}px`);
           content.style.setProperty("--bb-orion-fade-end", `${Math.max(start + 1, bottom)}px`);
         });
