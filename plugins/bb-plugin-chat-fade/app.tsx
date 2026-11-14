@@ -18,7 +18,7 @@ export default definePluginApp((app) => {
         const current = new Set<HTMLElement>();
         const toObserve = new Set<HTMLElement>();
         document.querySelectorAll<HTMLElement>("[data-thread-window] [data-page-scroll-viewport]").forEach((viewport) => {
-          const content = viewport.querySelector<HTMLElement>("[data-scroll-attached]");
+          const content = viewport.querySelector<HTMLElement>('[data-timeline-row-list="top-level"]');
           const footer = viewport.querySelector<HTMLElement>("[data-scroll-footer]");
           if (!content || !footer) return;
           current.add(content);
@@ -28,7 +28,7 @@ export default definePluginApp((app) => {
           // At the end messages are already above the footer; keep the last
           // lines fully visible instead of fading useful content.
           const bottom = atEnd ? content.scrollHeight + 100 : Math.max(0, footer.getBoundingClientRect().top - content.getBoundingClientRect().top);
-          const start = atEnd ? bottom - 1 : Math.max(0, bottom - 76);
+          const start = atEnd ? bottom - 1 : Math.max(0, bottom - 28);
           content.style.setProperty("--bb-orion-fade-start", `${start}px`);
           content.style.setProperty("--bb-orion-fade-end", `${Math.max(start + 1, bottom)}px`);
         });
