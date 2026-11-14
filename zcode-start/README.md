@@ -33,3 +33,7 @@ No API keys or tokens belong in this repository or BB's provider settings.
 ## Start Plan usage
 
 `node zcode-start/usage.mjs` reads the Start Plan balance using the existing ZCode login and device identity, without printing or storing credentials. It reports plan name, model, token use and the end of the billing window. Override `ZCODE_APP_VERSION` and `ZCODE_ACP_DIR` after checking compatibility during upgrades. BB's built-in ACP provider currently exposes no usage reader for this agent, so this command does not add a row to Provider Usage.
+
+## Context window
+
+ZCode 3.18.2's bundled model rules give GLM-5.3 a 1,000,000-token window. The ACP bridge otherwise falls back to 200,000 because it cannot find a per-model entry for the account provider. `node zcode-start/set-context-window.mjs` writes a model-specific rule for `account:zai-start-plan` / `GLM-5.3-Flash`, preserving existing rules and making a backup. The bridge reads the file as it emits usage, so the corrected size appears after a subsequent usage update; the command is idempotent. Review the upstream model rules on upgrades.

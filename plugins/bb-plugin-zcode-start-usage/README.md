@@ -7,3 +7,5 @@ The host bridge reads the installed ZCode credential store via the existing pinn
 Requires the pinned local runtime and adapter from `../../zcode-start/install.py` (ZCode 3.18.2, zcode-acp-server 0.84.3); review the paths and headers during upgrades. Install with `bb plugin install --yes path:/absolute/path/to/bb-plugin-zcode-start-usage`, and verify with `bb settings usage --machine <host-id> --json`.
 
 The bundled Provider Usage UI currently filters out custom provider entries. This plugin therefore adds its own row to the existing settings list and compact sidebar card, updating it every minute. Its row is displayed alongside Codex or OpenCode and reports failures as unavailable.
+
+If a refresh fails, the card keeps the last successful value and labels its update time instead of replacing it with an error. A browser-local cached value is restored for up to one hour on reopening, marked as stale until a fresh request succeeds. Run `node --test plugins/bb-plugin-zcode-start-usage/usage-state.test.mjs` to check this behavior.
