@@ -13,3 +13,7 @@ Install locally: `bb plugin install path:/absolute/path/to/bb-personal-plugins/p
 The pinned ACP setup and upgrade instructions are in [zcode-start](zcode-start/README.md).
 
 The [ZCode icon plugin](plugins/bb-plugin-zcode-icon/README.md) supplies its provider mark in BB.
+
+## Voice input
+
+[Hex Voice](plugins/bb-plugin-hex-voice/README.md) transcribes BB recordings locally with Hex Parakeet v3.
