@@ -93,7 +93,7 @@
 }
 
 /* Fade the message content, not the wallpaper or composer. */
-.dark [data-thread-window] [data-scroll-attached] > div:has([data-timeline-row-list="top-level"]) {
+.dark [data-thread-window] :is([data-scroll-attached] > div:has([data-timeline-row-list="top-level"]), [data-timeline-row-list="top-level"][style*="--bb-orion-fade-start"]) {
   mask-image: linear-gradient(to bottom, #000 0, #000 var(--bb-orion-fade-start, 100%), transparent var(--bb-orion-fade-end, 100%));
   -webkit-mask-image: linear-gradient(to bottom, #000 0, #000 var(--bb-orion-fade-start, 100%), transparent var(--bb-orion-fade-end, 100%));
 }
