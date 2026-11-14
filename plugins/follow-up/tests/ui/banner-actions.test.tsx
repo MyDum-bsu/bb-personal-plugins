@@ -55,6 +55,20 @@ const menuItems = (slot: Slot) =>
 const amendCalls = (slot: Slot) =>
   slot.inspection.rpcCalls.filter((call) => call.method === "followups_amend");
 
+describe("banner visibility", () => {
+  it("hides the card when a previously used thread has no open rows", async () => {
+    const slot = renderBanner("thr_empty_regression", []);
+    await waitFor(() => expect(slot.inspection.rpcCalls.some((call) => call.method === "followups_list")).toBe(true));
+    await waitFor(() => expect(slot.container.textContent).toBe(""));
+  });
+
+  it("shows the card when there is an open row", async () => {
+    const entry = row("visible", "Keep this visible", "deferred");
+    const slot = renderBanner("thr_visible_regression", [entry]);
+    expect(await slot.findByRole("button", { name: `Put "${entry.text}" in the composer` })).toBeDefined();
+  });
+});
+
 describe("each row's one inline action", () => {
   const away = row("r1", "Move the docs site", "out-of-scope");
   const later = row("r2", "Tidy the config loader", "deferred");
