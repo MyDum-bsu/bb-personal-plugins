@@ -4,7 +4,7 @@ Personal extensions and settings for BB.
 
 ## Chat Sidebar
 
-Based on [seoperin/bb-plugin-chat-sidebar](https://github.com/seoperin/bb-plugin-chat-sidebar) v0.2.8. Pinned chats come first, followed by waiting, working and other chats; each group is ordered by activity. Project headings can be reordered by dragging on desktop; the order is stored in the current browser's local storage. The current installation uses a local UI bundle over the upstream cache because changing its source would remove plugin settings.
+Based on [seoperin/bb-plugin-chat-sidebar](https://github.com/seoperin/bb-plugin-chat-sidebar) v0.2.8. Pinned chats come first, followed by waiting, working and other chats; each group is ordered by activity. Project headings can be reordered by dragging on desktop; the order is stored in the current browser's local storage. Sticky project headings are disabled (`bb plugin config chat-sidebar set stickyHeadings false`) so they scroll with their groups. The current installation uses a local UI bundle over the upstream cache because changing its source would remove plugin settings.
 
 ## Follow Up
 
