@@ -79,6 +79,13 @@
 .dark [data-sidebar="sidebar"], .dark [data-sidebar="content"], .dark main[data-sidebar="inset"] { background-color: transparent; }
 .dark [data-thread-window] { background: transparent; }
 .dark [data-thread-window] [data-page-scroll-viewport] { backdrop-filter: blur(4px); }
+/* Let the wallpaper continue behind the thread controls. */
+.dark main[data-sidebar="inset"] header.bg-surface-scrim {
+  background: rgba(20, 15, 15, .28);
+  border-bottom-color: transparent;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
 /* Soft glass grouping behind the sidebar chats, with legible labels. */
 .dark .chat-sidebar section > ul { background: rgba(21, 16, 16, .42); border: 1px solid rgba(185, 205, 190, .10); border-radius: 10px; padding: 3px; }
 .dark .chat-sidebar section > button { color: #D3CCC7; }
