@@ -207,3 +207,8 @@
 .dark [data-thread-window] [class~="before:bg-border-seam"]:has(> [data-timeline-row-list="nested"])::before {
   content: none;
 }
+
+/* Thinking text keeps its indentation without a vertical rule. */
+.dark [data-thread-window] div.max-h-80.overflow-auto.whitespace-pre-wrap.break-words.border-l.pl-3 {
+  border-left: 0;
+}
