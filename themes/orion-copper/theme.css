@@ -175,3 +175,17 @@
 .dark [data-sidebar="sidebar"] [data-overflow-fade="above"][data-overflow-fade-tone="sidebar"] {
   display: none;
 }
+
+/* One restrained glass card per expanded project, including its heading. */
+.dark .chat-sidebar section:has(> ul) {
+  background-color: rgba(36, 26, 25, .48);
+  border: 1px solid #594441;
+  border-radius: 11px;
+  padding: 3px;
+  margin-bottom: 8px;
+}
+.dark .chat-sidebar section:has(> ul) > ul {
+  background: transparent;
+  border: 0;
+  padding: 2px;
+}
