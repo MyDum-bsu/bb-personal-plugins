@@ -202,3 +202,8 @@
 .dark [data-timeline-row-id] [class~="group/toggle"] > span > span.opacity-40:has(.text-subtle-foreground) {
   opacity: .68;
 }
+
+/* Expanded work remains indented, without an extra vertical guide. */
+.dark [data-thread-window] [class~="before:bg-border-seam"]:has(> [data-timeline-row-list="nested"])::before {
+  content: none;
+}
