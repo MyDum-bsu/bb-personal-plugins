@@ -44,6 +44,12 @@ export default definePluginApp((app) => {
       style.textContent = `
         .tiptap .bb-composer-fenced-code { color: #ddd5cf; background: rgba(66, 57, 54, .8); font-family: var(--font-mono, monospace); border-radius: 3px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
         .tiptap .bb-composer-fence-marker { color: transparent; font-size: 0; letter-spacing: 0; }
+        /* Soft breaks live inside one paragraph. Keep its empty lines on the
+           same surface while the fenced block is still being written. */
+        .tiptap p:has(> .bb-composer-fence-marker:first-child):not(:has(> .bb-composer-fence-marker ~ .bb-composer-fence-marker)) {
+          background: rgba(66, 57, 54, .8); padding: 2px 10px; border-radius: 8px;
+        }
+        .tiptap p:has(> .bb-composer-fence-marker:first-child):not(:has(> .bb-composer-fence-marker ~ .bb-composer-fence-marker)) > .bb-composer-fenced-code { background: transparent; }
         .tiptap p:has(> .bb-composer-fenced-code):not(:has(br)) { background: rgba(66, 57, 54, .8); padding: 2px 10px; }
         .tiptap p:has(> .bb-composer-fenced-code):not(:has(br)) > .bb-composer-fenced-code { background: transparent; }
         .tiptap p:has(> .bb-composer-fenced-code):not(:has(br)):not(p:has(> .bb-composer-fenced-code) + p) { border-radius: 8px 8px 0 0; }
