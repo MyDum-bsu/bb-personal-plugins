@@ -63,9 +63,11 @@ export default definePluginApp((app) => {
       const update = () => {
         frame = 0;
         const selectors: string[] = [];
+        const groups: string[][] = [];
         document.querySelectorAll<HTMLElement>('.tiptap[contenteditable="true"]').forEach((editor) => {
           if (!editor.id) return;
           let inside = false;
+          let group: string[] = [];
           for (const [index, paragraph] of Array.from(editor.children).entries()) {
             if (paragraph.tagName !== "P") continue;
             let belongs = inside;
@@ -73,10 +75,16 @@ export default definePluginApp((app) => {
               belongs = true;
               inside = !inside;
             }
-            if (belongs) selectors.push(`#${CSS.escape(editor.id)} > p:nth-child(${index + 1})`);
+            if (belongs) {
+              const selector = `#${CSS.escape(editor.id)} > p:nth-child(${index + 1})`;
+              selectors.push(selector);
+              group.push(selector);
+            }
+            if (!inside && group.length) { groups.push(group); group = []; }
           }
+          if (group.length) groups.push(group);
         });
-        const css = selectors.length ? `${selectors.join(",")} { background: rgba(66, 57, 54, .8); padding: 2px 10px; }\n${selectors.map((s) => `${s} > .bb-composer-fenced-code`).join(",")} { background: transparent; }` : "";
+        const css = selectors.length ? `${selectors.join(",")} { background: rgba(66, 57, 54, .8); padding: 2px 10px; border-radius: 0; }\n${selectors.map((s) => `${s} > .bb-composer-fenced-code`).join(",")} { background: transparent; }\n${groups.map((g) => g.length === 1 ? `${g[0]} { border-radius: 8px; }` : `${g[0]} { border-radius: 8px 8px 0 0; }\n${g[g.length - 1]} { border-radius: 0 0 8px 8px; }`).join("\n")}` : "";
         if (linesStyle.textContent !== css) linesStyle.textContent = css;
       };
       const observer = new MutationObserver(() => {
