@@ -111,3 +111,10 @@
   mask-image: linear-gradient(to bottom, #000 0, #000 var(--bb-orion-fade-start, 100%), transparent var(--bb-orion-fade-end, 100%));
   -webkit-mask-image: linear-gradient(to bottom, #000 0, #000 var(--bb-orion-fade-start, 100%), transparent var(--bb-orion-fade-end, 100%));
 }
+
+/* Frosted glass on user messages, following the Tracker card treatment. */
+.dark [data-message-column] [class~="group/message"] > div > .bg-surface-recessed {
+  background-color: rgba(15, 19, 17, .78);
+  -webkit-backdrop-filter: blur(20px) saturate(.9);
+  backdrop-filter: blur(20px) saturate(.9);
+}
