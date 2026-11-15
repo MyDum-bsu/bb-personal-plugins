@@ -37,3 +37,5 @@ The [ZCode icon plugin](plugins/bb-plugin-zcode-icon/README.md) supplies its pro
 [ZCode Start Plan usage](plugins/bb-plugin-zcode-start-usage/README.md) adds the actual Start Plan token balance to Provider Usage, including the compact sidebar card.
 
 [Pi compatibility](pi/README.md) avoids a duplicate `AskUserQuestion` tool when Pi runs inside BB.
+
+Three Orion palette alternatives are available as `orion-lavender`, `orion-blue` and `orion-copper`. They retain the glass, wallpaper, mobile and message-fade behavior of `noir-orion-glass`; copy each `theme.css` into the corresponding `~/.bb/theme/` directory to install. Select one in Settings → Appearance → Palette; the previous green version remains `noir-orion-glass`.
