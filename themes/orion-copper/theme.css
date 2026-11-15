@@ -66,7 +66,7 @@
 
 /* Give conversation text and its composer a little more room on large screens. */
 @media (min-width: 1100px) {
-  .dark [data-thread-window] [data-scroll-attached],
+  .dark [data-thread-window] [data-page-scroll-viewport] [class~="max-w-[760px]"],
   .dark [data-thread-window] [data-scroll-footer] .chat-prompt-box { max-width: 920px; }
 }
 
@@ -206,6 +206,8 @@
 }
 /* Wide tables can extend outside the reply card; keep their whole surface legible. */
 .dark [data-message-column][class~="group/message"] [data-markdown-preview] > div:has(> div > table) {
+  width: 100% !important;
+  margin-inline: 0 !important;
   background: rgba(24, 18, 17, .92);
   border-radius: 8px;
 }
