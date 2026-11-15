@@ -81,7 +81,7 @@
 .dark [data-thread-window] [data-page-scroll-viewport] { backdrop-filter: blur(4px); }
 /* Let the wallpaper continue behind the thread controls. */
 .dark main[data-sidebar="inset"] header.bg-surface-scrim {
-  background: rgba(20, 15, 15, .28);
+  background: transparent;
   border-bottom-color: transparent;
   -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
@@ -168,7 +168,8 @@
     backdrop-filter: blur(4px);
   }
   .dark [data-sidebar="panel"],
-  .dark [data-thread-window] [data-page-scroll-viewport] {
+  .dark [data-thread-window] [data-page-scroll-viewport],
+  .dark main[data-sidebar="inset"] header.bg-surface-scrim {
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
   }
@@ -205,7 +206,7 @@
 
 /* A quiet, borderless reading surface for agent replies. */
 .dark [data-message-column][class~="group/message"] > [data-sidebar-swipe-selectable] {
-  background: rgba(24, 20, 20, .73);
+  background: rgba(24, 26, 33, .78);
   border-radius: 12px;
   padding: 10px 12px;
   -webkit-backdrop-filter: blur(12px);
@@ -215,7 +216,7 @@
 .dark [data-message-column][class~="group/message"] [data-markdown-preview] > div:has(> div > table) {
   width: 100% !important;
   margin-inline: 0 !important;
-  background: rgba(24, 18, 17, .92);
+  background: rgba(24, 26, 33, .92);
   border-radius: 8px;
 }
 /* Make elapsed-time metadata easier to see without competing with the reply. */
