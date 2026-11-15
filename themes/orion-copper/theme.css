@@ -206,7 +206,7 @@
 
 /* A quiet, borderless reading surface for agent replies. */
 .dark [data-message-column][class~="group/message"] > [data-sidebar-swipe-selectable] {
-  background: rgba(24, 26, 33, .78);
+  background: rgba(30, 30, 30, .78);
   border-radius: 12px;
   padding: 10px 12px;
   -webkit-backdrop-filter: blur(12px);
@@ -216,7 +216,7 @@
 .dark [data-message-column][class~="group/message"] [data-markdown-preview] > div:has(> div > table) {
   width: 100% !important;
   margin-inline: 0 !important;
-  background: rgba(24, 26, 33, .92);
+  background: rgba(30, 30, 30, .92);
   border-radius: 8px;
 }
 /* Make elapsed-time metadata easier to see without competing with the reply. */
