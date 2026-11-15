@@ -57,8 +57,41 @@ export default definePluginApp((app) => {
         .tiptap p:has(> .bb-composer-fenced-code):not(:has(br)):not(p:has(> .bb-composer-fenced-code) + p):not(:has(+ p > .bb-composer-fenced-code)) { border-radius: 8px; }
       `;
       document.head.append(style);
-      signal.addEventListener("abort", () => style.remove(), { once: true });
-      return () => style.remove();
+      const linesStyle = document.createElement("style");
+      document.head.append(linesStyle);
+      let frame = 0;
+      const update = () => {
+        frame = 0;
+        const selectors: string[] = [];
+        document.querySelectorAll<HTMLElement>('.tiptap[contenteditable="true"]').forEach((editor) => {
+          if (!editor.id) return;
+          let inside = false;
+          for (const [index, paragraph] of Array.from(editor.children).entries()) {
+            if (paragraph.tagName !== "P") continue;
+            let belongs = inside;
+            for (const marker of paragraph.querySelectorAll(".bb-composer-fence-marker")) {
+              belongs = true;
+              inside = !inside;
+            }
+            if (belongs) selectors.push(`#${CSS.escape(editor.id)} > p:nth-child(${index + 1})`);
+          }
+        });
+        const css = selectors.length ? `${selectors.join(",")} { background: rgba(66, 57, 54, .8); padding: 2px 10px; }\n${selectors.map((s) => `${s} > .bb-composer-fenced-code`).join(",")} { background: transparent; }` : "";
+        if (linesStyle.textContent !== css) linesStyle.textContent = css;
+      };
+      const observer = new MutationObserver(() => {
+        if (!frame) frame = requestAnimationFrame(update);
+      });
+      observer.observe(document.body, { subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ["class"] });
+      update();
+      const dispose = () => {
+        observer.disconnect();
+        if (frame) cancelAnimationFrame(frame);
+        linesStyle.remove();
+        style.remove();
+      };
+      signal.addEventListener("abort", dispose, { once: true });
+      return dispose;
     },
   });
   app.composer.customize({
