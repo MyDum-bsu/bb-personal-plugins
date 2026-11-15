@@ -147,3 +147,31 @@
   border-color: transparent;
   box-shadow: none;
 }
+
+/* Desktop: one shared blur behind both panes avoids a visible seam. */
+@media (min-width: 768px) {
+  .dark [data-testid="app-layout-root"] {
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+  }
+  .dark [data-sidebar="panel"],
+  .dark [data-thread-window] [data-page-scroll-viewport] {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  .dark [data-sidebar="panel"],
+  .dark .chat-sidebar section > ul {
+    background: transparent;
+  }
+}
+
+/* Keep scrolling, but remove the rail and the footer's dark fade line. */
+.dark [data-sidebar="content"] {
+  scrollbar-width: none;
+}
+.dark [data-sidebar="content"]::-webkit-scrollbar {
+  display: none;
+}
+.dark [data-sidebar="sidebar"] [data-overflow-fade="above"][data-overflow-fade-tone="sidebar"] {
+  display: none;
+}
