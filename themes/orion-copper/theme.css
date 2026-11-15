@@ -118,3 +118,25 @@
   -webkit-backdrop-filter: blur(20px) saturate(.9);
   backdrop-filter: blur(20px) saturate(.9);
 }
+
+/* Sidebar: keep the wallpaper continuous and make each project a glass pane. */
+.dark [data-sidebar="panel"] {
+  border-right-color: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+.dark [data-sidebar="content"] {
+  scrollbar-gutter: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(194, 160, 142, .34) transparent;
+}
+.dark .chat-sidebar section > ul {
+  background: rgba(49, 34, 31, .55);
+  border-color: rgba(194, 164, 148, .16);
+  -webkit-backdrop-filter: blur(18px) saturate(.88);
+  backdrop-filter: blur(18px) saturate(.88);
+}
+.dark [data-sidebar="footer"] {
+  background: linear-gradient(to bottom, transparent, rgba(26, 19, 18, .22));
+  border-color: transparent;
+}
