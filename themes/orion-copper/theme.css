@@ -119,24 +119,31 @@
   backdrop-filter: blur(20px) saturate(.9);
 }
 
-/* Sidebar: keep the wallpaper continuous and make each project a glass pane. */
+/* Carry the same wallpaper and blur through the sidebar and the chat. */
 .dark [data-sidebar="panel"] {
+  background: rgba(21, 16, 16, .14);
   border-right-color: transparent;
-  -webkit-backdrop-filter: none;
-  backdrop-filter: none;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
 }
 .dark [data-sidebar="content"] {
   scrollbar-gutter: auto;
   scrollbar-width: thin;
   scrollbar-color: rgba(194, 160, 142, .34) transparent;
 }
+/* Project groups have only a light tint; the parent provides the blur. */
 .dark .chat-sidebar section > ul {
-  background: rgba(49, 34, 31, .55);
-  border-color: rgba(194, 164, 148, .16);
-  -webkit-backdrop-filter: blur(18px) saturate(.88);
-  backdrop-filter: blur(18px) saturate(.88);
+  background: rgba(49, 34, 31, .18);
+  border-color: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+.dark .chat-sidebar section > button {
+  background: transparent;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, .65);
 }
 .dark [data-sidebar="footer"] {
-  background: linear-gradient(to bottom, transparent, rgba(26, 19, 18, .22));
+  background: transparent;
   border-color: transparent;
+  box-shadow: none;
 }
