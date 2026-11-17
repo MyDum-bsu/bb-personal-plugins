@@ -268,7 +268,6 @@ function ChatListView({ activeThreadId, isCompactViewport, onNavigate }: PluginT
   const projectGroups = groupByProject(visible, projects);
   const projectRanks = new Map(projectOrder.map((id, index) => [id, index]));
   const sortedGroups = projectGroups.slice().sort((a, b) => {
-    if (a.key === "pinned" || b.key === "pinned") return a.key === "pinned" ? -1 : 1;
     if (a.project === null || b.project === null) return a.project === null ? 1 : -1;
     return (projectRanks.get(a.key) ?? Infinity) - (projectRanks.get(b.key) ?? Infinity);
   });

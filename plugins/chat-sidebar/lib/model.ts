@@ -399,28 +399,27 @@ export function folderBlocks(folders: readonly Folder[]): { entryId: string; fol
 }
 
 export interface ProjectGroup {
-  /** `pinned` for the pinned block, otherwise the project id (`""` when unknown). */
+  /** The project id (`""` when unknown). */
   key: string;
   project: PluginSidebarProject | null;
   chats: Chat[];
 }
 
 /**
- * "List headers" mode: pinned chats first as their own block, then one group
- * per project in order of use. Rows keep their order inside a group.
+ * "List headers" mode: one group per project in order of use. Pinned chats
+ * stay inside their project — the incoming order already puts them first, so a
+ * pin floats to the top of its own group instead of a separate Pinned block.
+ * Rows keep their order inside a group.
  */
 export function groupByProject(rows: readonly Chat[], projects: readonly PluginSidebarProject[]): ProjectGroup[] {
-  const pinned = rows.filter((row) => row.thread.isPinned);
-  const rest = rows.filter((row) => !row.thread.isPinned);
   const groups: ProjectGroup[] = [];
-  if (pinned.length > 0) groups.push({ key: "pinned", project: null, chats: pinned });
   const byProject = new Map<string, Chat[]>();
-  for (const row of rest) {
+  for (const row of rows) {
     const list = byProject.get(row.thread.projectId) ?? [];
     list.push(row);
     byProject.set(row.thread.projectId, list);
   }
-  for (const project of projectsByUse(rest, projects)) {
+  for (const project of projectsByUse(rows, projects)) {
     const list = byProject.get(project.id);
     if (list !== undefined) groups.push({ key: project.id, project, chats: list });
     byProject.delete(project.id);

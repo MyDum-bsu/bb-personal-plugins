@@ -26,13 +26,11 @@ export function GroupHeader({
 }) {
   const t = useT();
   const name =
-    group.key === "pinned"
-      ? t("folder.pinned")
-      : group.project === null
-        ? t("folder.other")
-        : group.project.isPersonal
-          ? t("folder.personal")
-          : group.project.name;
+    group.project === null
+      ? t("folder.other")
+      : group.project.isPersonal
+        ? t("folder.personal")
+        : group.project.name;
   const unread = group.chats.filter((chat) => chat.unread).length;
   const lane = mostUrgentLane(group.chats);
   const header = (

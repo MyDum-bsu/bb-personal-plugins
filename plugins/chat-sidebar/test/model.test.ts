@@ -266,7 +266,7 @@ describe("matchesRule", () => {
 });
 
 describe("groupByProject", () => {
-  it("puts pins first, then projects by use, then threads with an unknown project", () => {
+  it("keeps pins inside their project, above the project's other chats", () => {
     const rows = buildChats(
       [
         thread("pin", { isPinned: true, projectId: "proj_b" }),
@@ -278,8 +278,7 @@ describe("groupByProject", () => {
     );
     const groups = groupByProject(rows, projects);
     expect(groups.map((group) => [group.key, ids(group.chats)])).toEqual([
-      ["pinned", ["pin"]],
-      ["proj_b", ["b"]],
+      ["proj_b", ["pin", "b"]],
       ["proj_a", ["a"]],
       ["", ["x"]],
     ]);

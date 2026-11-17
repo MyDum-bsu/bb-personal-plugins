@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- Pinned chats stay in their project's group instead of a separate **Pinned**
+  block: a pin floats to the top of its own project, in bb's manual pin order,
+  and the sidebar no longer spends a whole group on pins.
+
 ## 0.2.8
 
 - Add a **Last 24 hours** smart folder alongside **Today**. Any custom folder
