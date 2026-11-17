@@ -4,7 +4,15 @@ Personal extensions and settings for BB.
 
 ## Chat Sidebar
 
-Based on [seoperin/bb-plugin-chat-sidebar](https://github.com/seoperin/bb-plugin-chat-sidebar) v0.2.8. Pinned chats come first, followed by waiting, working and other chats; each group is ordered by activity. Project headings can be reordered by dragging on desktop; the order is stored in the current browser's local storage. Sticky project headings are disabled (`bb plugin config chat-sidebar set stickyHeadings false`) so they scroll with their groups. The current installation uses a local UI bundle over the upstream cache because changing its source would remove plugin settings.
+Based on [seoperin/bb-plugin-chat-sidebar](https://github.com/seoperin/bb-plugin-chat-sidebar) v0.2.8. Project headings can be reordered by dragging on desktop; the order is stored in the current browser's local storage. Sticky project headings are disabled (`bb plugin config chat-sidebar set stickyHeadings false`) so they scroll with their groups.
+
+Pinning is project-scoped: a pinned chat stays inside its project group and sorts first there, in bb's manual pin order. There is no separate Pinned group. That is a local change to `groupByProject` in [lib/model.ts](plugins/chat-sidebar/lib/model.ts); upstream renders pins as their own block. The current installation uses a local UI bundle over the upstream cache because changing its source would remove plugin settings — [tools/restore-personal-plugins.sh](tools/restore-personal-plugins.sh) rebuilds the fork and copies its `dist/` into the installed plugin.
+
+## Composer cards
+
+[Composer Card Scroll](plugins/bb-plugin-composer-scroll/README.md) lays the cards above the composer (follow-ups, queue, child threads, git) two per row, moves the follow-up list to the right gutter and the queue to the left one on wide panes, and makes both scroll with the wheel instead of scrolling the message list.
+
+Install locally: `bb plugin install path:/absolute/path/to/bb-personal-plugins/plugins/bb-plugin-composer-scroll`. Unlike the theme tweaks it previously lived in, this is theme-independent.
 
 ## Follow Up
 
@@ -21,6 +29,23 @@ The [ZCode icon plugin](plugins/bb-plugin-zcode-icon/README.md) supplies its pro
 ## Voice input
 
 [Hex Voice](plugins/bb-plugin-hex-voice/README.md) transcribes BB recordings locally with Hex Parakeet v3.
+
+## opencode harness
+
+[opencode](opencode/README.md) runs the opencode ACP provider on two subscriptions: OpenCode Go and the ChatGPT (Codex) subscription that Pi and omp already use. The config copy lives in `opencode/opencode.jsonc`; ChatGPT credentials are imported into opencode's own store and are not kept here.
+
+## Restoring after a bb restart
+
+A long-running bb server can lose its esbuild helper, after which every plugin
+install or reload fails with `frontend bundle build ... The service is no longer
+running`. Restart bb, then:
+
+```sh
+tools/restore-personal-plugins.sh
+```
+
+It installs the composer-card plugin and rebuilds the Chat Sidebar fork over the
+installed upstream bundle. Reload the window afterwards.
 
 ## Thinking formatting
 
